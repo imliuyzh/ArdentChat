@@ -1,0 +1,42 @@
+#login-section
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100vw;
+    height: 100vh;
+}
+
+#logo-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo
+{
+    width: 295px;
+}
+
+#form-input
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#ardent-id-input, #full-name-input, #links
+{
+    width: 100%;
+}
+
+#form-input input[type="text"]
+{
+    width: 75%;
+}
+
+#form-input legend, #form-input input[type="submit"]
+{
+    align-self: flex-start;
+}

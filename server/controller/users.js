@@ -30,20 +30,18 @@ router.put('/:id', (req, res, next) => {
     if ('contact' in req.query === false) {
         throw new Error('Bad Request');
     }
-    let info = { affiliated: [] };
+    console.log(req.params.id);
     User.findById(req.params.id)
         .then(result => {
-            if (result === null) {
+            if (result === null || req.query.contact === '') {
                 throw new Error('Bad Request');
             }
-            result.affiliated.push(req.query.contact.toString());
-            info.affiliated = Array.from(new Set(result.affiliated));
+            return Array.from(new Set([...result.affiliated, req.query.contact]));
         })
-        .then(User.findByIdAndUpdate(req.params.id, info, { new: true }))
-        .then(contentSent => {
-            res.json(contentSent);
-        })
-        .catch(err => next(err));
+        .then(info => User.findByIdAndUpdate(req.params.id, { affiliated: info }, { new: true }))
+        .then(contentSent => res.json(contentSent))
+        .catch((err) => next(err));
+        
 });
 
 module.exports = router;

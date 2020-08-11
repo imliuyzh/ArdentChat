@@ -1,13 +1,18 @@
 {
   "name": "server",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "debug": "nodemon --inspect index.js"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "mongoose": "^5.9.28"
   },
   "devDependencies": {

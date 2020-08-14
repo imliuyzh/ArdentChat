@@ -19,8 +19,9 @@ export default function LoginPage() {
   return (
     <div id="login-page-container">
       <DialogWindow
-        openDialog={(message === '') ? false : true}
-        title={"Account Activation"}
+        showDialog={message !== ''}
+        setShowDialog={() => setMessage('')}
+        title={"Message"}
         message={message}
       />
 
@@ -81,21 +82,21 @@ function sendLoginRequest(id, msgCallback) {
   fetch(`http://localhost:3001/api/users/${id}`, { method: 'GET' })
     .then(res => {
       if (res.status !== 200) {
-        msgCallback(`Account Does Not Exist.`);
+        msgCallback(`Invalid Account.`);
       } else {
         msgCallback("Welcome to ArdentChat!");
       }
     })
-    .catch(() => msgCallback("Unknown Error Occurred. Try again Later."));
+    .catch(() => msgCallback("Unknown Error Occurred: Try again Later."));
 }
 
 function sendActivationRequest(id, name, msgCallback) {
   fetch(`http://localhost:3001/api/users/${id}?name=${name}`, { method: 'POST' })
     .then(res => {
         if (res.status !== 201) {
-          msgCallback(`Account Not Created (${res.status} ${res.statusText}). Please Try Again.`);
+          msgCallback(`Account Not Created (${res.status} ${res.statusText}): Please Try Later.`);
         } else {
-          msgCallback("Account Created. Your Account is Ready.");
+          msgCallback("Account Created: Your Account is Ready.");
         }
     })
     .catch(() => msgCallback("Unknown Error Occurred. Try again Later."));

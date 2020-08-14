@@ -8,8 +8,7 @@ import {
   DialogTitle
 } from '@material-ui/core';
 
-export default function DialogWindow({ openDialog, title, message }) {
-  let [showDialog, setShowDialog] = React.useState(openDialog);
+export default function DialogWindow({ showDialog, setShowDialog, title, message }) {
   return (
     <Dialog
       open={showDialog}

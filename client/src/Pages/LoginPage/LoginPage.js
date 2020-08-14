@@ -7,14 +7,23 @@ import {
 } from '@material-ui/core';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import PersonIcon from '@material-ui/icons/Person';
+
+import DialogWindow from '../../Components/DialogWindow/DialogWindow';
 import './LoginPage.css';
 
 export default function LoginPage() {
   let [id, setID] = React.useState(''),
-      [name, setName] = React.useState('');
+      [name, setName] = React.useState(''),
+      [message, setMessage] = React.useState('');
 
   return (
     <div id="login-page-container">
+      <DialogWindow
+        openDialog={(message === '') ? false : true}
+        title={"Account Activation"}
+        message={message}
+      />
+
       <form id="login-page-form">
         <Typography variant="h2">ArdentChat</Typography>
 
@@ -29,38 +38,36 @@ export default function LoginPage() {
               )
             }}
             onChange={event => setID(event.target.value)}
-            required
           />
 
           <TextField
             label="Name"
             InputProps={{
               startAdornment: (
-                <InputAdornment position="end">
+                <InputAdornment position="start">
                   <PersonIcon />
                 </InputAdornment>
               )
             }}
             onChange={event => setName(event.target.value)}
-            required
           />
         </div>
 
         <div id="login-form-buttons">
           <Button
             variant="contained" 
-            size="medium" 
+            size="large" 
             color="primary"
-            onClick={() => sendLoginRequest(id)}
+            onClick={() => sendLoginRequest(id, setMessage)}
           >
               Login
           </Button>
 
           <Button 
             variant="outlined"
-            size="medium"
+            size="large"
             color="primary"
-            onClick={() => sendActivationRequest(id, name)}
+            onClick={() => sendActivationRequest(id, name, setMessage)}
           >
             Activate
           </Button>
@@ -70,26 +77,26 @@ export default function LoginPage() {
   );
 }
 
-function sendLoginRequest(id) {
+function sendLoginRequest(id, msgCallback) {
   fetch(`http://localhost:3001/api/users/${id}`, { method: 'GET' })
     .then(res => {
       if (res.status !== 200) {
-        alert(`Account Does Not Exist.`);
+        msgCallback(`Account Does Not Exist.`);
       } else {
-        alert("Welcome to ArdentChat!");
+        msgCallback("Welcome to ArdentChat!");
       }
     })
-    .catch(() => alert("Unknown Error Occurred. Try again Later."));
+    .catch(() => msgCallback("Unknown Error Occurred. Try again Later."));
 }
 
-function sendActivationRequest(id, name) {
+function sendActivationRequest(id, name, msgCallback) {
   fetch(`http://localhost:3001/api/users/${id}?name=${name}`, { method: 'POST' })
     .then(res => {
         if (res.status !== 201) {
-          alert(`Account Not Created (${res.status} ${res.statusText}). Please Try Again.`);
+          msgCallback(`Account Not Created (${res.status} ${res.statusText}). Please Try Again.`);
         } else {
-          alert("Account Created. Your Account is Ready.");
+          msgCallback("Account Created. Your Account is Ready.");
         }
     })
-    .catch(() => alert("Unknown Error Occurred. Try again Later."));
+    .catch(() => msgCallback("Unknown Error Occurred. Try again Later."));
 }

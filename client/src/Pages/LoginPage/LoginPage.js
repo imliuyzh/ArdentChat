@@ -9,6 +9,7 @@ import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import PersonIcon from '@material-ui/icons/Person';
 
 import DialogWindow from '../../Components/DialogWindow/DialogWindow';
+import Logo from '../../Assets/Images/logo.png';
 import './LoginPage.css';
 
 export default function LoginPage() {
@@ -17,7 +18,7 @@ export default function LoginPage() {
       [message, setMessage] = React.useState('');
 
   return (
-    <div id="login-page-container">
+    <div id="login-form-container">
       <DialogWindow
         showDialog={message !== ''}
         setShowDialog={() => setMessage('')}
@@ -73,6 +74,8 @@ export default function LoginPage() {
             Activate
           </Button>
         </div>
+
+        <img src={Logo} alt="Ardent Logo" id="logo" />
       </form>
     </div>
   );

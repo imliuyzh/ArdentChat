@@ -1,4 +1,4 @@
-#login-page-container {
+#login-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,4 +24,10 @@
     display: flex;
     justify-content: center;
     gap: 14px;
+}
+
+#logo {
+    position: absolute;
+    top: 93%;
+    width: 20px;
 }

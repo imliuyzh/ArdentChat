@@ -12,7 +12,7 @@ import DialogWindow from '../../Components/DialogWindow/DialogWindow';
 import Logo from '../../Assets/Images/logo.png';
 import './LoginPage.css';
 
-export default function LoginPage() {
+export default function LoginPage({ setUser }) {
   let [id, setID] = React.useState(''),
       [name, setName] = React.useState(''),
       [message, setMessage] = React.useState('');
@@ -60,7 +60,7 @@ export default function LoginPage() {
             variant="contained" 
             size="large" 
             color="primary"
-            onClick={() => sendLoginRequest(id, setMessage)}
+            onClick={() => sendLoginRequest(id, setMessage, setUser)}
           >
               Login
           </Button>
@@ -81,16 +81,18 @@ export default function LoginPage() {
   );
 }
 
-function sendLoginRequest(id, msgCallback) {
-  fetch(`http://localhost:3001/api/users/${id}`, { method: 'GET' })
-    .then(res => {
-      if (res.status !== 200) {
-        msgCallback(`Invalid Account.`);
-      } else {
-        msgCallback("Welcome to ArdentChat!");
-      }
-    })
-    .catch(() => msgCallback("Unknown Error Occurred: Try again Later."));
+async function sendLoginRequest(id, msgCallback, setUser) {
+  try {
+    let res = await fetch(`http://localhost:3001/api/users/${id}`, { method: 'GET' });
+    if (res.status !== 200) {
+      msgCallback(`Invalid Account.`);
+    } else {
+      let info = await res.json();
+      setUser(info);
+    }
+  } catch {
+    msgCallback("Unknown Error Occurred: Try again Later.")
+  }
 }
 
 function sendActivationRequest(id, name, msgCallback) {

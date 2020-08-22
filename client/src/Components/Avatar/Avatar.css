@@ -1,0 +1,29 @@
+.avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #ffffff;
+    padding: 20px 30px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.avatar-container:hover {
+    background-color: #004570;
+}
+
+.avatar-info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar-name {
+    font-family: "Roboto Black", sans-serif;
+    font-size: 20px;
+}
+
+.avatar-id {
+    margin-top: 8px;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+}

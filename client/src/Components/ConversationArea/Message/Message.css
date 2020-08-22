@@ -1,0 +1,27 @@
+.message-container {
+    margin: 24px 0;
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto", sans-serif;
+}
+
+.message-user {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 8px;
+}
+
+.message-time {
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0 0 18px;
+    opacity: 0.3;
+}
+
+.message {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 24px;
+}

@@ -1,9 +1,9 @@
 .avatar-container {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
     color: #ffffff;
-    padding: 20px 30px;
+    padding: 24px 30px;
     transition: all 0.5s;
     cursor: pointer;
 }
@@ -18,12 +18,14 @@
 }
 
 .avatar-name {
-    font-family: "Roboto Black", sans-serif;
-    font-size: 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .avatar-id {
-    margin-top: 8px;
+    margin-top: 10px;
     font-family: "Roboto", sans-serif;
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 300;
 }

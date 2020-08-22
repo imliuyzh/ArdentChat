@@ -1,9 +1,9 @@
 #chatpage-container {
     display: grid;
-    grid-template-columns: minmax(295px, 25%) 75%;
-    width: 100vw;
-    height: 100vh;
+    grid-template-columns: minmax(295px, 24%) 76%;
     font-family: "Roboto", sans-serif;
+    height: 100vh;
+    width: 100vw;
 }
 
 #contact-container {
@@ -17,18 +17,24 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 25px 30px 0;
+    margin: 36px 30px 0;
 }
 
 #contact-list-container {
-    margin: 36px 0 0;
+    margin: 28px 0 0;
 }
 
 #chat-container {
     margin: 0;
     display: grid;
-    grid-template-rows: 70% 30%;
+    grid-template-rows: 7fr 4fr;
     font-family: "Roboto", sans-serif;
+    max-height: 100vh;
+}
+
+#conversation-container {
+    padding: 28px 36px 0 36px;
+    overflow-y: scroll;
 }
 
 #input-control {
@@ -39,13 +45,15 @@
 }
 
 #message-area {
-    padding: 15px 15px 15px 32px;
+    padding: 20px 15px 15px 32px;
     border: none;
     outline: none;
     resize: none;
-    width: 94%;
-    height: calc(76.5% - 50px);
+    width: 95%;
+    height: calc(80% - 50px);
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     line-height: 24px;
+    text-align: justify;
+    text-justify: inter-word;
 }

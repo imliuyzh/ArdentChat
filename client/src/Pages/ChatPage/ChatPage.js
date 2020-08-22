@@ -10,16 +10,18 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 import Avatar from '../../Components/Avatar/Avatar';
+import ConversationArea from '../../Components/ConversationArea/ConversationArea';
 
 let useStyles = makeStyles(() => ({
   addPerson: {
-    color: '#ffffff',
     fontFamily: 'Roboto Light, sans-serif',
+    fontSize: '16px',
+    color: '#ffffff',
     "&&&:before": {
-      borderColor: "#ffffff"
+      borderColor: "#ffffff",
     },
     "&&:after": {
-      borderColor: "#ffffff"
+      borderColor: "#ffffff",
     }
   },
   input: {
@@ -47,20 +49,21 @@ export default function ChatPage({ user }) {
         </div>
 
         <div id="contact-list-container">
-          <Avatar ardentID="ID1" name="NAME1" />
-          <Avatar ardentID="ID2" name="NAME2" />
-          <Avatar ardentID="ID3" name="NAME3" />
-          <Avatar ardentID="ID4" name="NAME4" />
-          <Avatar ardentID="ID5" name="NAME5" />
-          <Avatar ardentID="ID6" name="NAME6" />
-          <Avatar ardentID="ID7" name="NAME7" />
-          <Avatar ardentID="ID8" name="NAME8" />
+          <Avatar ardentID="ID1" name="Full Name" />
+          <Avatar ardentID="ID2" name="Full Name" />
+          <Avatar ardentID="ID3" name="Full Name" />
+          <Avatar ardentID="ID4" name="Full Name" />
+          <Avatar ardentID="ID5" name="Full Name" />
+          <Avatar ardentID="ID6" name="Full Name" />
+          <Avatar ardentID="ID7" name="Full Name" />
+          <Avatar ardentID="ID8" name="Full Name" />
           {/*{user.affiliated.map(contact => displayContact(contact))}*/}
         </div>
       </div>
 
       <div id="chat-container">
         <div id="conversation-container">
+          <ConversationArea newMessage={[]}/>
         </div>
 
         <div id="input-container">
@@ -77,7 +80,10 @@ export default function ChatPage({ user }) {
             </IconButton>
           </div>
 
-          <textarea id="message-area" autofocus />
+          <textarea 
+            id="message-area" 
+            placeholder="Write your Message Here..."
+            autofocus />
         </div>
       </div>
     </div>

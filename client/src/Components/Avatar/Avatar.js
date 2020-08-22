@@ -6,7 +6,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 let useStyles = makeStyles(() => ({
   accountIcon: {
-    fontSize: '62px'
+    fontSize: '54px'
   }
 }));
 

@@ -24,8 +24,9 @@
 }
 
 .avatar-id {
-    margin-top: 10px;
+    margin-top: 8px;
     font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-weight: 300;
+    font-style: italic;
 }

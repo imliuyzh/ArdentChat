@@ -57,6 +57,8 @@ export default function ChatPage({ user }) {
           <Avatar ardentID="ID6" name="Full Name" />
           <Avatar ardentID="ID7" name="Full Name" />
           <Avatar ardentID="ID8" name="Full Name" />
+          <Avatar ardentID="ID9" name="Full Name" />
+          <Avatar ardentID="ID10" name="Full Name" />
           {/*{user.affiliated.map(contact => displayContact(contact))}*/}
         </div>
       </div>

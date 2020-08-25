@@ -8,9 +8,11 @@ import AttachmentIcon from '@material-ui/icons/Attachment';
 import SendIcon from '@material-ui/icons/Send';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import { v4 } from 'uuid';
 
 import Avatar from '../../Components/Avatar/Avatar';
 import ConversationArea from '../../Components/ConversationArea/ConversationArea';
+import DialogWindow from '../../Components/DialogWindow/DialogWindow';
 
 let useStyles = makeStyles(() => ({
   addPerson: {
@@ -30,42 +32,56 @@ let useStyles = makeStyles(() => ({
 }));
 
 export default function ChatPage({ user }) {
-  let [targetUser, setTargetUser] = React.useState(null);
+  let [contactList, setContactList] = React.useState(user.affiliated);
+  let [contractInput, setContractInput] = React.useState('');
+  let [targetUser, setTargetUser] = React.useState('');
+  let [messageText, setMessageText] = React.useState('');
+  let [errorMessage, setErrorMessage] = React.useState('');
   let classes = useStyles();
+
   return (
     <div id="chatpage-container">
+      <DialogWindow
+        showDialog={errorMessage !== ''}
+        setShowDialog={() => setErrorMessage('')}
+        title={"Message"}
+        message={errorMessage}
+      />
       <div id="contact-container">
         <div id="add-contact-section">
           <Input
             className={classes.addPerson}
             size="small"
-            placeholder="New Contract (ArdentID)" 
+            placeholder="New Contract (ArdentID)"
+            onChange={event => setContractInput(event.target.value)}
             startAdornment={
               <InputAdornment position="start">
-                <PersonAddIcon />
+                <IconButton 
+                  id="add-contract-button" 
+                  aria-label="Add a contract"
+                  className={classes.addPerson}
+                  onClick={() => addNewContract(user.ardentID, contractInput, setErrorMessage, setContactList)}
+                >
+                  <PersonAddIcon />
+                </IconButton>
               </InputAdornment>
             }
           />
         </div>
 
         <div id="contact-list-container">
-          <Avatar ardentID="ID1" name="Full Name" />
-          <Avatar ardentID="ID2" name="Full Name" />
-          <Avatar ardentID="ID3" name="Full Name" />
-          <Avatar ardentID="ID4" name="Full Name" />
-          <Avatar ardentID="ID5" name="Full Name" />
-          <Avatar ardentID="ID6" name="Full Name" />
-          <Avatar ardentID="ID7" name="Full Name" />
-          <Avatar ardentID="ID8" name="Full Name" />
-          <Avatar ardentID="ID9" name="Full Name" />
-          <Avatar ardentID="ID10" name="Full Name" />
-          {/*{user.affiliated.map(contact => displayContact(contact))}*/}
+          {contactList.map(contact => 
+            <Avatar 
+              key={v4()}
+              ardentID={contact}
+              setTargetUser={setTargetUser}
+            />)}
         </div>
       </div>
 
       <div id="chat-container">
         <div id="conversation-container">
-          <ConversationArea newMessage={[]}/>
+          <ConversationArea targetUser={targetUser} newMessage={[]}/>
         </div>
 
         <div id="input-container">
@@ -85,15 +101,29 @@ export default function ChatPage({ user }) {
           <textarea 
             id="message-area" 
             placeholder="Write your Message Here..."
-            autofocus />
+            onChange={event => setMessageText(event.target.value)}
+            autoFocus 
+          />
         </div>
       </div>
     </div>
   );
 }
 
-function displayContact(contact) {
-  fetch(`http://localhost:3001/api/users/${contact.ardentID}`, { method: 'GET' })
-    .then(res => res.json())
-    .then(info => <Avatar ardentID={info.ardentID} name={info.name} />);
+async function addNewContract(userID, contractID, setErrorMessage, setContactList) {
+  if (userID !== contractID) {
+    let req = await fetch(`http://localhost:3001/api/users/${userID}?contact=${contractID}`, 
+      { method: 'PUT' });
+
+    if (req.status === 400) {
+      setErrorMessage('Please Check your Input.');
+    } else if (req.status === 404) {
+      setErrorMessage('Invalid User.');
+    } else {
+      let info = await req.json();
+      setContactList(info[0].affiliated);
+    }
+  } else {
+    setErrorMessage("Can't Add yourself to the Contract List.");
+  }
 }

@@ -7,15 +7,35 @@ import {
 } from '@material-ui/core';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import PersonIcon from '@material-ui/icons/Person';
+import { makeStyles } from '@material-ui/core/styles';
 
 import DialogWindow from '../../Components/DialogWindow/DialogWindow';
 import Logo from '../../Assets/Images/logo.png';
 import './LoginPage.css';
 
+let useStyles = makeStyles(() => ({
+  inputField: {
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#0076be',
+    },
+  },
+  loginButton: {
+    backgroundColor: "#0076be",
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: "#004570"
+    }
+  },
+  activateButton: {
+    color: "#0076be",
+  }
+}));
+
 export default function LoginPage({ setUser }) {
   let [id, setID] = React.useState(''),
       [name, setName] = React.useState(''),
       [message, setMessage] = React.useState('');
+  let classes = useStyles();
 
   return (
     <div id="login-form-container">
@@ -32,6 +52,7 @@ export default function LoginPage({ setUser }) {
         <div id="login-page-form-inputs">
           <TextField
             label="ArdentID"
+            className={classes.inputField}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -44,6 +65,7 @@ export default function LoginPage({ setUser }) {
 
           <TextField
             label="Name"
+            className={classes.inputField}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -59,7 +81,7 @@ export default function LoginPage({ setUser }) {
           <Button
             variant="contained" 
             size="large" 
-            color="primary"
+            className={classes.loginButton}
             onClick={() => sendLoginRequest(id, setMessage, setUser)}
           >
               Login
@@ -68,7 +90,7 @@ export default function LoginPage({ setUser }) {
           <Button 
             variant="outlined"
             size="large"
-            color="primary"
+            className={classes.activateButton}
             onClick={() => sendActivationRequest(id, name, setMessage)}
           >
             Activate

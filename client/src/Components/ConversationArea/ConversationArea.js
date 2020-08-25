@@ -1,9 +1,11 @@
 import React from 'react';
 import './ConversationArea.css';
 
+import { v4 } from 'uuid';
+
 import Message from './Message/Message';
 
-export default function ConversationArea({ newMessage }) {
+export default function ConversationArea({ targetUser, newMessage }) {
   let [messages, setMessages] = React.useState([
     {
       name: 'Full Name',
@@ -45,7 +47,7 @@ export default function ConversationArea({ newMessage }) {
   return (
     <>
       <h1 id="conversation-title">Messages</h1>
-      {messages.map(message => <Message content={message} />)}
+      {messages.map(message => <Message key={v4()} content={message} />)}
     </>
   );
 }

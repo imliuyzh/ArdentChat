@@ -17,7 +17,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/:id', (req, res, next) => {
-    if ('name' in req.query === false || req.query.name === '') {
+    if ('id' in req.query === false || req.query.name === '') {
         throw new Error('Bad Request');
     }
 

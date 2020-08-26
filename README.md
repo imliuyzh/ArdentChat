@@ -4,14 +4,16 @@ ArdentChat is a web application for people to have individual communication with
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
+### Running the Application
+
 ### Built With
 - React.js
-  - Material UI
+  - Material-UI
   - UUID
-- MongoDB (Atlas Service)
+- MongoDB Atlas
   - Mongoose
 - Node.js
-  - Nodemon
+  - nodemon
 - Express.js
   - CORS
 - Socket.IO

@@ -8,7 +8,7 @@ export default function Message({ message }) {
     <div className="message-container">
       <h2 className="message-user">{message.senderName}</h2>
       <span className="message-time">{message.time}</span>
-      <span className="message">{showMessage(message)}</span>
+      <span>{showMessage(message)}</span>
     </div>
   );
 }
@@ -19,9 +19,9 @@ function showMessage(message) {
 }
 
 function displayText(message) {
-  return message.content.split("\n").map(line => <p key={v4()}>{line}</p>);
+  return message.content.split("\n").map(line => <p key={v4()} className="message">{line}</p>);
 }
 
 function displayFile(message) {
-  return <a href={message.content}>File</a>;
+  return <a href={message.content} className="message">File</a>;
 }

@@ -55,12 +55,14 @@ export default function ChatPage({ user }) {
               name={user.name}
               messageText={messageText}
               targetUser={targetUser}
+              setMessageText={setMessageText}
               setErrorMessage={setErrorMessage}
             />
           </div>
 
           <textarea 
             id="message-area" 
+            value={messageText}
             placeholder="Write your Message Here..."
             onChange={event => setMessageText(event.target.value)}
             autoFocus 

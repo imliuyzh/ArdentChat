@@ -5,13 +5,13 @@ import SendIcon from '@material-ui/icons/Send';
 
 import socket from '../Socket/Socket';
 
-export default function SendButton({ id, name, messageText, targetUser, setErrorMessage }) {
+export default function SendButton({ id, name, messageText, targetUser, setMessageText, setErrorMessage }) {
   return (
     <>
       <IconButton
         id="send-button"
         aria-label="Send a message"
-        onClick={() => sendMessage(id, name, messageText, targetUser, setErrorMessage)}
+        onClick={() => sendMessage(id, name, messageText, targetUser, setMessageText, setErrorMessage)}
       >
         <SendIcon />
       </IconButton>
@@ -19,7 +19,7 @@ export default function SendButton({ id, name, messageText, targetUser, setError
   );
 }
 
-function sendMessage(id, name, messageText, targetUser, setErrorMessage) {
+function sendMessage(id, name, messageText, targetUser, setMessageText, setErrorMessage) {
   if (targetUser !== '' && messageText !== '') {
     let now = new Date().toLocaleString('en-US', {
       dateStyle: 'short',
@@ -33,6 +33,8 @@ function sendMessage(id, name, messageText, targetUser, setErrorMessage) {
       time: now,
       type: 'text/plain'
     });
+
+    setMessageText('');
   } else {
     setErrorMessage('Please Start a Conversation.');
   }

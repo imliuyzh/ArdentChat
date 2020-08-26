@@ -1,25 +1,21 @@
 import React from 'react';
 import './ChatPage.css';
 
-import io from 'socket.io-client';
-
 import AttachButton from '../../Components/AttachButton/AttachButton';
 import ConversationArea from '../../Components/ConversationArea/ConversationArea';
 import ContactSection from '../../Components/ContactSection/ContactSection';
 import DialogWindow from '../../Components/DialogWindow/DialogWindow';
 import SendButton from '../../Components/SendButton/SendButton';
+import socket from '../../Components/Socket/Socket';
 
 export default function ChatPage({ user }) {
   let [targetUser, setTargetUser] = React.useState('');
   let [messageText, setMessageText] = React.useState('');
   let [errorMessage, setErrorMessage] = React.useState('');
-  let socket = React.useState(io('http://localhost:3001'))[0];
 
   React.useEffect(() => {
     socket.emit('initializeSocket', { id: user.ardentID });
-    socket.on('error', err => console.log);
-    socket.on('connect_error', err => console.log);
-  });
+  }, []);
 
   return (
     <div id="chatpage-container">
@@ -43,7 +39,6 @@ export default function ChatPage({ user }) {
           <ConversationArea
             id={user.ardentID}
             targetUser={targetUser}
-            socket={socket}
           />
         </div>
 
@@ -56,7 +51,6 @@ export default function ChatPage({ user }) {
               messageText={messageText}
               targetUser={targetUser}
               setErrorMessage={setErrorMessage}
-              socket={socket}
             />
           </div>
 

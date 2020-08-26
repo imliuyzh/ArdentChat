@@ -3,13 +3,15 @@ import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
 
-export default function SendButton({ id, name, messageText, targetUser, setErrorMessage, socket }) {
+import socket from '../Socket/Socket';
+
+export default function SendButton({ id, name, messageText, targetUser, setErrorMessage }) {
   return (
     <>
       <IconButton
         id="send-button"
         aria-label="Send a message"
-        onClick={() => sendMessage(id, name, messageText, targetUser, setErrorMessage, socket)}
+        onClick={() => sendMessage(id, name, messageText, targetUser, setErrorMessage)}
       >
         <SendIcon />
       </IconButton>
@@ -17,7 +19,7 @@ export default function SendButton({ id, name, messageText, targetUser, setError
   );
 }
 
-function sendMessage(id, name, messageText, targetUser, setErrorMessage, socket) {
+function sendMessage(id, name, messageText, targetUser, setErrorMessage) {
   if (targetUser !== '' && messageText !== '') {
     let now = new Date().toLocaleString('en-US', {
       dateStyle: 'short',

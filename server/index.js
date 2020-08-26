@@ -24,17 +24,11 @@ app.use(midware.internalErrorHandler);
 let server = http.createServer(app);
 let io = socketio(server);
 io.on('connection', socket => {
-    socket.on('initializeSocket', ({ id }) => {
-        console.log(id);
-        socket.join(id);
-    });
+    socket.on('initializeSocket', ({ id }) => socket.join(id));
     socket.on('sendMessage', ({ ids, senderName, content, time }) => {
-        socket.to(ids[0])
-              .emit('receiveMessage', { ids, senderName, content, time });
-        socket.to(ids[1])
-              .emit('receiveMessage', { ids, senderName, content, time });
+        socket.emit('receiveMessage', { ids, senderName, content, time });
+        socket.to(ids[1]).emit('receiveMessage', { ids, senderName, content, time });
     });
-    socket.on('error', error => console.log(error));
 });
 
 const PORT = process.env.PORT || 3001;

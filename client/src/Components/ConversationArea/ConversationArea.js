@@ -4,13 +4,12 @@ import './ConversationArea.css';
 import { v4 } from 'uuid';
 
 import Message from './Message/Message';
+import socket from '../Socket/Socket';
 
-export default function ConversationArea({ id, targetUser, socket }) {
+export default function ConversationArea({ id, targetUser }) {
   let [messages, setMessages] = React.useState([]);
   React.useEffect(() => {
-    socket.on('receiveMessage', info => {
-      setMessages([...messages, info]);
-    });
+    socket.on('receiveMessage', info => setMessages([...messages, info]));
   });
 
   if (targetUser !== '') {

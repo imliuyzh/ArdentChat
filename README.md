@@ -16,7 +16,6 @@ These instructions will get you a copy of the project up and running on your loc
     - Should be simple with the SRV address provided by Atlas
     ``````
     const URI = 'mongodb+srv://<USERNAME>:<PASSWORD>@<SERVER-ADDRESS>/<APP-NAME>?retryWrites=true';
-    const URI = 'mongodb+srv://username:password@ardent-milestone-3.gspun.mongodb.net/chat-app?retryWrites=true&w=majority';
     module.exports = { URI };
     ``````
 6. Type ```yarn start``` to run the front-end code and ```npm start``` for the back-end code

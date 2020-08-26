@@ -30,7 +30,7 @@ let useStyles = makeStyles(() => ({
   }
 }));
 
-export default function LoginPage({ setUser }) {
+export default function LoginPage({ setUser, socket }) {
   let [id, setID] = React.useState(''),
       [name, setName] = React.useState(''),
       [message, setMessage] = React.useState('');
@@ -81,7 +81,7 @@ export default function LoginPage({ setUser }) {
             variant="contained" 
             size="large" 
             className={classes.loginButton}
-            onClick={() => sendLoginRequest(id, setMessage, setUser)}
+            onClick={() => sendLoginRequest(id, setMessage, setUser, socket)}
           >
               Login
           </Button>
@@ -100,7 +100,7 @@ export default function LoginPage({ setUser }) {
   );
 }
 
-async function sendLoginRequest(id, msgCallback, setUser) {
+async function sendLoginRequest(id, msgCallback, setUser, socket) {
   try {
     let res = await fetch(`http://localhost:3001/api/users/${id}`, { method: 'GET' });
     if (res.status !== 200) {

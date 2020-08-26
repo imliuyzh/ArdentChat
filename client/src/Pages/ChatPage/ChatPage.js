@@ -12,12 +12,14 @@ import SendButton from '../../Components/SendButton/SendButton';
 export default function ChatPage({ user }) {
   let [targetUser, setTargetUser] = React.useState('');
   let [messageText, setMessageText] = React.useState('');
-  let [messages, setMessages] = React.useState([]);
   let [errorMessage, setErrorMessage] = React.useState('');
+  let socket = React.useState(io('http://localhost:3001'))[0];
 
-  let socket = io('http://localhost:3001', { transports: [ 'websocket' ] });
-  socket.emit('initializeSocket', { id: user.ardentID });
-  socket.on('receiveMessage', info => setMessages([...messages, info]));
+  React.useEffect(() => {
+    socket.emit('initializeSocket', { id: user.ardentID });
+    socket.on('error', err => console.log);
+    socket.on('connect_error', err => console.log);
+  });
 
   return (
     <div id="chatpage-container">
@@ -41,7 +43,7 @@ export default function ChatPage({ user }) {
           <ConversationArea
             id={user.ardentID}
             targetUser={targetUser}
-            messages={messages}
+            socket={socket}
           />
         </div>
 

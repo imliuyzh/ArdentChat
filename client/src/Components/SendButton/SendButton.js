@@ -18,11 +18,17 @@ export default function SendButton({ id, name, messageText, targetUser, setError
 }
 
 function sendMessage(id, name, messageText, targetUser, setErrorMessage, socket) {
-  if (targetUser !== '') {
+  if (targetUser !== '' && messageText !== '') {
+    let now = new Date().toLocaleString('en-US', {
+      dateStyle: 'short',
+      timeStyle: 'medium',
+    });
+
     socket.emit('sendMessage', {
       ids: [id, targetUser],
       senderName: name,
-      content: messageText
+      content: messageText,
+      time: now
     });
   } else {
     setErrorMessage('Please Start a Conversation.')

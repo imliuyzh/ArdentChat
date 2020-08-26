@@ -25,22 +25,19 @@ let server = http.createServer(app);
 let io = socketio(server);
 io.on('connection', socket => {
     socket.on('initializeSocket', ({ id }) => {
+        console.log(id);
         socket.join(id);
     });
-    socket.on('sendMessage', ({ ids, senderName, content }) => {
-        console.log(content);
-        let now = new Date().toLocaleString('en-US', {
-            dateStyle: 'short',
-            timeStyle: 'medium',
-        });
+    socket.on('sendMessage', ({ ids, senderName, content, time }) => {
         socket.to(ids[0])
-              .emit('receiveMessage', { ids, senderName, content, time: now });
+              .emit('receiveMessage', { ids, senderName, content, time });
         socket.to(ids[1])
-              .emit('receiveMessage', { ids, senderName, content, time: now });
+              .emit('receiveMessage', { ids, senderName, content, time });
     });
+    socket.on('error', error => console.log(error));
 });
 
-const PORT = process.env.PORT | 3001;
+const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => 
     console.log(`\n[${new Date().toString()}] Server listening on port ${PORT}`)
 );

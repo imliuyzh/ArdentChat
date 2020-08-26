@@ -10,7 +10,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import { makeStyles } from '@material-ui/core/styles';
 
 import DialogWindow from '../../Components/DialogWindow/DialogWindow';
-import Logo from '../../Assets/Images/logo.png';
 import './LoginPage.css';
 
 let useStyles = makeStyles(() => ({
@@ -96,8 +95,6 @@ export default function LoginPage({ setUser }) {
             Activate
           </Button>
         </div>
-
-        <img src={Logo} alt="Ardent Logo" id="logo" />
       </form>
     </div>
   );

@@ -1,4 +1,5 @@
 let User = require('../model/user');
+let midware = require('../util/middleware');
 
 let router = require('express').Router();
 router.get('/:id', (req, res, next) => {
@@ -17,7 +18,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/:id', (req, res, next) => {
-    if ('id' in req.query === false || req.query.name === '') {
+    if ('id' in req.params === false || req.query.name === '' || 'name' in req.query === false) {
         throw new Error('Bad Request');
     }
 
@@ -42,13 +43,18 @@ router.put('/:id', async (req, res, next) => {
             throw new Error('Bad Request');
         }
 
-        let srcUsrInfo = await User.findById(req.params.id),
+        let srcUsrInfo = await User.findById(req.params.id), 
             tgtUsrInfo = await User.findById(req.query.contact);
         if (srcUsrInfo !== null && tgtUsrInfo !== null) {
-            let updatedSrcUsrInfo = Array.from(new Set([...srcUsrInfo.affiliated, req.query.contact])),
-                updatedTgtUsrInfo = Array.from(new Set([...tgtUsrInfo.affiliated, req.params.id])),
+            let result = midware.detectDuplicateContact(req.params.id, req.query.contact, srcUsrInfo, tgtUsrInfo);
+            let sentInfo1 = srcUsrInfo, sentInfo2 = tgtUsrInfo;
+
+            if (result === false) {
+                let updatedSrcUsrInfo = [...srcUsrInfo.affiliated, { contactID: req.query.contact, contactName: tgtUsrInfo.name }],
+                    updatedTgtUsrInfo = [...tgtUsrInfo.affiliated, { contactID: req.params.id, contactName: srcUsrInfo.name }];
                 sentInfo1 = await User.findByIdAndUpdate(req.params.id, { affiliated: updatedSrcUsrInfo }, { new: true }),
                 sentInfo2 = await User.findByIdAndUpdate(req.query.contact, { affiliated: updatedTgtUsrInfo }, { new: true });
+            }
             
             res.json([
                 {

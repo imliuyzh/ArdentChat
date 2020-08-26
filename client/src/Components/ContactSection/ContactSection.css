@@ -1,0 +1,10 @@
+#add-contact-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 36px 30px 0;
+}
+
+#contact-list-container {
+    margin: 28px 0 0;
+}

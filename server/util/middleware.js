@@ -1,3 +1,17 @@
+function detectDuplicateContact(srcUsr, tgtUsr, srcUsrInfo, tgtUsrInfo) {
+    for (let srcUsrContact of srcUsrInfo.affiliated) {
+        if (srcUsrContact.contactID === tgtUsr) {
+            return true;
+        }
+    }
+    for (let tgtUsrContact of tgtUsrInfo.affiliated) {
+        if (tgtUsrContact.contactID === srcUsr) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function invalidEndpointHandler(req, res) {
     res.sendStatus(404);
 }
@@ -18,6 +32,7 @@ function internalErrorHandler(err, req, res, next) {
 }
 
 module.exports = {
+    detectDuplicateContact,
     invalidEndpointHandler,
     internalErrorHandler
 };

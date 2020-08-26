@@ -10,13 +10,10 @@ let useStyles = makeStyles(() => ({
   }
 }));
 
-export default function Avatar({ ardentID, setTargetUser }) {
-  let [name, setName] = React.useState('');
+export default function Avatar({ ardentID, name, setTargetContact }) {
   let classes = useStyles();
-  getContactName(ardentID, setName);
-
   return (
-    <div className="avatar-container" onClick={() => setTargetUser(ardentID)}>
+    <div className="avatar-container" onClick={() => setTargetContact(ardentID)}>
       <AccountCircleIcon className={classes.accountIcon}/>
       <div className="avatar-info-container">
         <span className="avatar-name">{name}</span>
@@ -24,10 +21,4 @@ export default function Avatar({ ardentID, setTargetUser }) {
       </div>
     </div>
   );
-}
-
-async function getContactName(contact, setName) {
-  let req = await fetch(`http://localhost:3001/api/users/${contact}`, { method: 'GET' }),
-      info = await req.json();
-  setName(info.name);
 }

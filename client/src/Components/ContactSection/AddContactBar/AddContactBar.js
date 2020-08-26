@@ -6,6 +6,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
+import socket from '../../Socket/Socket';
+
 let useStyles = makeStyles(() => ({
   addPerson: {
     fontFamily: 'Roboto Light, sans-serif',
@@ -23,7 +25,13 @@ let useStyles = makeStyles(() => ({
 export default function AddContactBar({ currentUserID, setContactList, setErrorMessage}) {
   let classes = useStyles();
   let [contractInput, setContractInput] = React.useState('');
-  
+  React.useEffect(() => {
+    socket.on('newConversation', info => {
+      console.log(info);
+      setContactList(info.affiliated);
+    });
+  });
+
   return (
     <Input
       className={classes.addPerson}
@@ -46,7 +54,7 @@ export default function AddContactBar({ currentUserID, setContactList, setErrorM
   );
 }
 
-async function addNewContract(userID, contractID, setErrorMessage, setContactList) {
+async function addNewContract(userID, contractID, setErrorMessage) {
   if (userID !== contractID) {
     let req = await fetch(`http://localhost:3001/api/users/${userID}?contact=${contractID}`, 
       { method: 'PUT' });
@@ -56,8 +64,10 @@ async function addNewContract(userID, contractID, setErrorMessage, setContactLis
     } else if (req.status === 404) {
       setErrorMessage('Invalid User.');
     } else {
-      let info = await req.json();
-      setContactList(info[0].affiliated);
+      socket.emit('createConversation', {
+        from: userID,
+        to: contractID
+      });
     }
   } else {
     setErrorMessage("Can't Add yourself to the Contract List.");

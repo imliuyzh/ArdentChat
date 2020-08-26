@@ -20,7 +20,7 @@ These instructions will get you a copy of the project up and running on your loc
     ``````
 6. Type ```yarn start``` to run the front-end code and ```npm start``` for the back-end code
     - The front-end should be running on ```localhost:3000 ```and ```localhost:3001``` for the back-end unless you have other applications running simultaneously
-7. Hit Ctrl+C to stop running
+7. Hit ```Ctrl+C``` on terminals running the front-end and back-end code to stop running
 
 ### Built With
 - React.js

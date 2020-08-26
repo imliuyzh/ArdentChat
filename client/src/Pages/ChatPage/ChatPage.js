@@ -44,7 +44,12 @@ export default function ChatPage({ user }) {
 
         <div id="input-container">
           <div id="input-control">
-            <AttachButton />
+            <AttachButton
+              id={user.ardentID}
+              name={user.name}
+              targetUser={targetUser}
+              setErrorMessage={setErrorMessage}
+            />
             <SendButton
               id={user.ardentID}
               name={user.name}

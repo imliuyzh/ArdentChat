@@ -8,6 +8,7 @@ import socket from '../Socket/Socket';
 
 export default function ConversationArea({ id, targetUser }) {
   let [messages, setMessages] = React.useState([]);
+  
   React.useEffect(() => {
     socket.on('receiveMessage', info => setMessages([...messages, info]));
   });

@@ -30,9 +30,10 @@ function sendMessage(id, name, messageText, targetUser, setErrorMessage) {
       ids: [id, targetUser],
       senderName: name,
       content: messageText,
-      time: now
+      time: now,
+      type: 'text/plain'
     });
   } else {
-    setErrorMessage('Please Start a Conversation.')
+    setErrorMessage('Please Start a Conversation.');
   }
 }

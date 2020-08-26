@@ -26,9 +26,9 @@ let io = socketio(server);
 io.on('connection', socket => {
     socket.on('initializeSocket', ({ id }) => socket.join(id));
     socket.on('createConversation', ({ from, to }) => midware.getUpdatedUserInfo(from, to, socket));
-    socket.on('sendMessage', ({ ids, senderName, content, time }) => {
-        socket.emit('receiveMessage', { ids, senderName, content, time });
-        socket.to(ids[1]).emit('receiveMessage', { ids, senderName, content, time });
+    socket.on('sendMessage', ({ ids, senderName, content, time, type }) => {
+        socket.emit('receiveMessage', { ids, senderName, content, time, type });
+        socket.to(ids[1]).emit('receiveMessage', { ids, senderName, content, time, type });
     });
 });
 

@@ -1,16 +1,27 @@
 import React from 'react';
 import './Message.css';
 
+import { v4 } from 'uuid';
+
 export default function Message({ message }) {
   return (
     <div className="message-container">
       <h2 className="message-user">{message.senderName}</h2>
       <span className="message-time">{message.time}</span>
-      <span className="message">{displayNewLine(message.content)}</span>
+      <span className="message">{showMessage(message)}</span>
     </div>
   );
 }
 
-function displayNewLine(content) {
-  return content.split("\n").map(line => <p>{line}</p>);
+function showMessage(message) {
+  return (message.type === 'text/plain') 
+    ? displayText(message) : displayFile(message);
+}
+
+function displayText(message) {
+  return message.content.split("\n").map(line => <p key={v4()}>{line}</p>);
+}
+
+function displayFile(message) {
+  return <a href={message.content}>File</a>;
 }

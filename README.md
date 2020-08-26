@@ -1,3 +1,4 @@
+![Demonstration](./demo.gif)
 # ArdentChat
 ArdentChat is a web application for people to have individual communication with each other. It was originally one of my assignments from my internship at Ardent Academy. It is also my first full-stack project that uses the MERN stack.
 

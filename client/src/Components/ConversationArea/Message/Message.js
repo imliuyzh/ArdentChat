@@ -23,5 +23,5 @@ function displayText(message) {
 }
 
 function displayFile(message) {
-  return <a href={message.content} className="message">File (Right Click the Link to Open in the New Tab)</a>;
+  return <a href={message.content} className="message">File (Right Click to Open)</a>;
 }

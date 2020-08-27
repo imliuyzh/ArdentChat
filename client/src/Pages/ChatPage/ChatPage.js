@@ -15,6 +15,7 @@ export default function ChatPage({ user }) {
 
   React.useEffect(() => {
     socket.emit('initializeSocket', { id: user.ardentID });
+    // eslint-disable-next-line
   }, []);
 
   return (

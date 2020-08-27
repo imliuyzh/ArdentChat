@@ -24,19 +24,19 @@ These instructions will get you a copy of the project up and running on your loc
 7. Hit ```Ctrl+C``` on terminals running the front-end and back-end code to stop running
 
 ## Built With
-- Front-end
-    - React.js
-      - Material-UI
-    - UUID
-    - Socket.IO
-- Back-end
-    - Node.js
-      - nodemon
-    - Express.js
-      - CORS
-    - MongoDB Atlas
-      - Mongoose
-    - Socket.IO
+### Front-end
+- React.js
+  - Material-UI
+- UUID
+- Socket.IO
+### Back-end
+- Node.js
+  - nodemon
+- Express.js
+  - CORS
+- MongoDB Atlas
+  - Mongoose
+- Socket.IO
 
 ## Versioning
 I used only Git bash for version management.

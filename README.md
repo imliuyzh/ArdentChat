@@ -27,7 +27,7 @@ These instructions will get you a copy of the project up and running on your loc
 - Front-end
     - React.js
       - Material-UI
-      - UUID
+    - UUID
     - Socket.IO
 - Back-end
     - Node.js
@@ -36,7 +36,7 @@ These instructions will get you a copy of the project up and running on your loc
       - CORS
     - MongoDB Atlas
       - Mongoose
-
+    - Socket.IO
 
 ## Versioning
 I used only Git bash for version management.

@@ -23,7 +23,7 @@ These instructions will get you a copy of the project up and running on your loc
     - The front-end should be running on ```localhost:3000 ```and ```localhost:3001``` for the back-end unless you have other applications running simultaneously
 7. Hit ```Ctrl+C``` on terminals running the front-end and back-end code to stop running
 
-### Built With
+## Built With
 - Front-end
     - React.js
       - Material-UI

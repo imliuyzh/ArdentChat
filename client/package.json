@@ -12,7 +12,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "5.0.1",
-    "socket.io": "^4.7.2",
+    "socket.io": "^4.8.0",
     "uuid": "^8.3.0"
   },
   "scripts": {
